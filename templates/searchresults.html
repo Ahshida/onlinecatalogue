@@ -1,0 +1,290 @@
+<!doctype html>
+{% load staticfiles %}
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        <script src="{% static 'js/vendor/modernizr-2.8.3.min.js' %}"></script>
+
+
+<!-- Stylesheets
+	============================================= -->
+	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href= "{% static 'bootstrap/css/bootstrap.css' %}"  type="text/css" />
+	<link rel="stylesheet" href="{% static 'bootstrap/css/style.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'bootstrap/css/dark.css' %}"  type="text/css" />
+	<link rel="stylesheet" href="{% static 'bootstrap/css/font-icons.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'bootstrap/css/animate.css' %}"  type="text/css" />
+	<link rel="stylesheet" href="{% static 'bootstrap/css/magnific-popup.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'lightbox.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'bootstrap/css/responsive.css' %}" type="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+
+	<!-- External JavaScripts
+	============================================= -->
+	<script type="text/javascript" src= "{% static 'bootstrap/js/jquery.js' %}" ></script>
+	<script type="text/javascript" src="{% static 'bootstrap/js/jquery.js' %}" ></script>
+	<script type="text/javascript" src="{% static 'lightbox.js' %}" ></script>
+
+
+
+
+
+        <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600' rel='stylesheet' type='text/css'>
+
+
+<!-- jquery for search -->
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+
+
+</head>
+
+
+     <body>
+
+<!-- Temporary header ============================================= -->
+<div>
+	<nav class="navbar">
+	<div class="navbar-header">
+	<a href="#">
+	<img align="left" height= 150 px width=160px src="{% static 'tile.png' %}"/></a>
+	</a> </div>
+	<p class="navbar-text navbar-right username">Hello
+	<a href="#" class="navbar-link" style="color: grey">{%for eachUser in loggedUser%}{% if eachUser %}{{ eachUser.name }}{% endif %}{% endfor %}</a> &nbsp; &nbsp; &nbsp; &nbsp; </p>
+	</nav>
+
+</div>
+
+
+
+       <!-- Content		============================================= -->
+		<section id="content">
+
+
+
+				<div class="container clearfix">
+
+					<div id="section-home" class="heading-block title-center nobottomborder page-section">
+					<form method="POST" action="/searchtool">
+              				{% csrf_token %}
+					<h3>Search For Products</h3>
+					<br><center>
+
+            				 <select  class="select_join" style="margin-left:15px" name="searchbar">{% for eachTool in alltools %}
+    <option class="form-control" value="{{eachTool.steel}}">{{eachTool.steel}}</option>{% endfor %}
+
+  </select>
+
+
+				</div>
+
+					<div class="center bottommargin">
+
+	<button class="button button-3d button-teal button-xlarge nobottommargin" type="submit" name="find"><i class="icon-star3"></i>Find</button> <br>
+ </form>  <br>
+<div class="divider divider-short divider-center"><i class="icon-circle"></i></div>
+                        </div>
+                    </div>
+
+</section>
+<!-- #content end -->
+
+
+
+<div class="row">
+            <div class="col-md-2"></div>
+            <div class="container clearfix">
+<h2>Search Results</h2>
+<a href="{% static 'SteelGradeComparisonChart.png' %}" title=" Steel Grade Comparison Chart" > <img src="{% static 'SteelGradeComparisonChart.png' %}"
+align="right" height= 150 px width=160px  alt="Steel Comparison Chart"></a>
+
+                <div class="listing" >
+
+
+                    {% for eachTool in toolsdata %}
+
+
+
+                    <div class="listheader"><b><h3>{{eachTool.steel}}</h3></b>
+ <!-- <a href="orderdetails.html"  class="button button-3d button-large button-rounded button-red" id="enquirebutton" >Enquire</a>-->
+
+
+
+                    </div><br>
+
+                    <div class="row" style="margin: 5px 10px;">
+
+                        <div class="col-md-9	">
+
+                            <div class="row">
+                                <div class="col-xs-6 col-md-4"><b>Available in:</b></div>
+                                <div class="col-xs-6 col-md-6"><strong><p style="text-transform: uppercase; font-size: 14px; ">{% if eachTool %}{{eachTool.availablein}} {% endif %}</p></div></strong>
+
+                            </div>
+
+                            <br>
+                            <div class="row">
+
+<hr>
+                                <div class="col-xs-6 col-md-4"><b>Tipson Grade No:</b><ul style="list-style-type:none"><li>{{eachTool.din}}</li></ul><br>
+                                </div>
+                                <div class="col-xs-6 col-md-4"><b>Grade Equivalent to:</b><br>
+                                    <ul style="list-style-type:none">
+                                        <li>ASSAB: {{eachTool.assab}}</li>
+                                        <li>AISI :{{eachTool.aisi}}</li>
+                                        <li>JIS  : {{eachTool.jis}}</li>
+                                    </ul></div>
+
+                            </div>
+
+                     </div>
+<div class="row">
+                                <div class="col-md-3 col-xs-12"><form action="/enquire">
+<button class="button button-3d button-rounded button-red" id="enquirebutton" >Enquire</button>
+</form></div>
+
+
+
+                            </div>
+
+<!--test
+<a href="/searchtool#myModal1" data-lightbox="inline" class="btn btn-default btn-lg">click</a>
+					<div class="modal1 mfp-hide" id="myModal1">
+						<div class="block divcenter" style="background-color: #FFF; max-width: 500px;">
+							<div class="feature-box fbox-center fbox-effect nobottomborder nobottommargin" style="padding: 40px;">
+								<div class="fbox-icon">
+									<a href="#"><i class="icon-screen i-alt"></i></a>
+								</div>
+								<h3>Responsive Layout<span class="subtitle">Adapts well on Devices</span></h3>
+							</div>
+							<div class="section center nomargin" style="padding: 30px;">
+								<a href="#" class="button" onClick="$.magnificPopup.close();return false;">Don't Show me Again</a>
+							</div>
+						</div>
+					</div>
+
+<end test-->
+
+
+
+<div class="masonry-thumbs col-5 clearfix" data-big="3" data-lightbox="gallery">
+			<hr> <div class="col-xs-6 col-md-6" style="padding: 10px;"><b>Specifications:</b><br>
+
+			 {% for eachImage in imagedata %}
+
+
+				<a href="{% static eachImage.image %}" data-lightbox="gallery-item">
+                               <img src="{% static eachImage.image %} "  class="img-thumbnail" style="margin-right: 100px;  padding-top: 5px;    padding-right: 5px;    padding-bottom: 5px;    padding-left: 5px;" title="" alt="Gallery Image">
+                                <div class="overlay">
+                                <div class="overlay-wrap"><i class="icon-line-zoom-in"></i></div>
+                                </div>
+											<div class="gap"></div>
+                            </a>
+		{% endfor %}
+
+					</div>
+ </div>
+
+
+		<!--using jquery plugin-->
+		<!--<div class="masonry-thumbs col-5 clearfix" data-big="3" data-lightbox="gallery">
+			{% for eachImage in imagedata %}
+			<a href="{% static eachImage.image %}" data-lightbox="image-1" data-title="My caption">
+			<img src="{% static eachImage.image %} " >
+			</a>
+			{% endfor %}
+
+                        </div>-->
+
+
+                    </div> <!--row end-->
+             {% endfor %}
+                </div><!--listing-->
+            </div><!--col md 8-->
+        </div>
+
+        <br><br><br>
+
+
+<!-- Footer
+		============================================= -->
+		<footer id="footer" class="dark">
+
+
+
+			<!-- Copyrights
+			============================================= -->
+			<div id="copyrights">
+
+				<div class="container clearfix">
+
+					<div class="col_half">
+						Copyrights &copy; 2016 All Rights Reserved by TIPSON.<br>
+
+					</div>
+
+					<div class="col_half col_last tright">
+						<div class="fright clearfix">
+
+
+
+						</div>
+
+						<div class="clear"></div>
+
+						<span class="middot">&middot;</span> <strong>POWERED BY HNK </strong><span class="middot">&middot;</span>
+					</div>
+
+				</div>
+
+			</div><!-- #copyrights end -->
+
+		</footer><!-- #footer end -->
+
+	</div><!-- #wrapper end -->
+
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop" class="icon-angle-up"></div>
+
+	<!-- Footer Scripts
+	============================================= -->
+	<script type="text/javascript" src="{% static 'bootstrap/js/functions.js' %}" ></script>
+        <!-- <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script> -->
+
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+    </body>
+</html>
+

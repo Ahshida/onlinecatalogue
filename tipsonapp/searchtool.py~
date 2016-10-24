@@ -1,0 +1,35 @@
+from tipsonapp.models import ToolsInfo
+from django.shortcuts import render
+from django.template import RequestContext
+import json
+
+
+def get_results(request):
+    request_context = RequestContext(request)
+    if request.method=='POST':
+        searchparam=request.POST
+        val=searchparam.get('searchbar')
+        print val
+        toolsdata=get_tooldata(val)
+        imagedata=get_imagedata(val)
+    jsonstr=imagedata[0]
+    imjsdata=jsonstr['imagelinks']
+    res=json.loads(imjsdata)
+    loggeduser=request.session['loggedonuser']
+    print loggeduser
+
+     
+    
+    return render(request,'searchresults.html', {'toolsdata':toolsdata,'imagedata':res})
+
+def get_tooldata(val):
+    toolsdata=ToolsInfo.objects.filter(steel=val).values()
+    return toolsdata
+
+def get_imagedata(val):
+    imagedata=ToolsInfo.objects.filter(steel=val).values('imagelinks')
+    return imagedata
+
+
+
+
